@@ -29,11 +29,17 @@ function XkcdInfo() {
       .then((response) => response.json())
       .then((data) => {
         setComic(data);
-        latest.current = data.num;
       });
   };
+
+  // Fetch latest comic on load
   useEffect(() => {
     fetchComic("latest");
+    fetch("https://xkcd.now.sh/?comic=latest")
+      .then((response) => response.json())
+      .then((data) => {
+        latest.current = data.num;
+      });
   }, []);
 
   const handleSubmit = (e) => {
